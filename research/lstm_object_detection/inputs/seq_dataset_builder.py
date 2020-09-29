@@ -13,7 +13,7 @@
 # limitations under the License.
 # ==============================================================================
 
-r"""tf.data.Dataset builder.
+"""tf.data.Dataset builder.
 
 Creates data sources for DetectionModels from an InputReader config. See
 input_reader.proto for options.
@@ -176,6 +176,8 @@ def build(input_reader_config,
               tf.squeeze(bboxes_pre[i], axis=0),
           fields.InputDataFields.groundtruth_classes:
               tf.squeeze(labels_pre[i], axis=0),
+          fields.InputDataFields.groundtruth_weights:
+              tf.ones([tf.shape(tf.squeeze(labels_pre[i], axis=0))[0]], dtype=tf.float32),
       }
       image_dict = preprocessor.preprocess(
           image_dict,
