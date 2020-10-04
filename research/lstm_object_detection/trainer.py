@@ -198,7 +198,7 @@ def get_restore_checkpoint_ops(restore_checkpoints, detection_model,
     available_var_map = (
         variables_helper.get_variables_available_in_checkpoint(
             var_map, restore_checkpoint))
-    for var_name, var in available_var_map.iteritems():
+    for var_name, var in available_var_map.items():
       if var in vars_restored:
         tf.logging.info('Variable %s contained in multiple checkpoints',
                      var.op.name)
@@ -210,7 +210,7 @@ def get_restore_checkpoint_ops(restore_checkpoints, detection_model,
     available_ema_var_map = {}
     ckpt_reader = tf.train.NewCheckpointReader(restore_checkpoint)
     ckpt_vars_to_shape_map = ckpt_reader.get_variable_to_shape_map()
-    for var_name, var in available_var_map.iteritems():
+    for var_name, var in available_var_map.items():
       var_name_ema = var_name + '/ExponentialMovingAverage'
       if var_name_ema in ckpt_vars_to_shape_map:
         available_ema_var_map[var_name_ema] = var

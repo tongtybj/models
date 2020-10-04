@@ -78,6 +78,7 @@ class LSTMSSDMetaArch(ssd_meta_arch.SSDMetaArch):
         target_assigner_instance=target_assigner_instance,
         add_summaries=add_summaries)
     self._unroll_length = unroll_length
+    self._restored_networks = 0
 
   @property
   def unroll_length(self):
