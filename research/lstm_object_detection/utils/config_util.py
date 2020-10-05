@@ -28,7 +28,7 @@ from object_detection.protos import pipeline_pb2
 from object_detection.utils import config_util
 
 
-def get_configs_from_pipeline_file(pipeline_config_path):
+def get_configs_from_pipeline_file(pipeline_config_path, config_override = None):
   """Reads configuration from a pipeline_pb2.TrainEvalPipelineConfig.
 
   Args:
@@ -44,7 +44,7 @@ def get_configs_from_pipeline_file(pipeline_config_path):
   with tf.gfile.GFile(pipeline_config_path, "r") as f:
     proto_str = f.read()
     text_format.Merge(proto_str, pipeline_config)
-  configs = config_util.get_configs_from_pipeline_file(pipeline_config_path)
+  configs = config_util.get_configs_from_pipeline_file(pipeline_config_path, config_override)
   if pipeline_config.HasExtension(internal_pipeline_pb2.lstm_model):
     configs["lstm_model"] = pipeline_config.Extensions[
         internal_pipeline_pb2.lstm_model]

@@ -122,7 +122,7 @@ def main(argv):
   flags.mark_flag_as_required('trained_checkpoint_prefix')
 
   pipeline_config = config_util.get_configs_from_pipeline_file(
-      FLAGS.pipeline_config_path)
+      FLAGS.pipeline_config_path, FLAGS.config_override)
 
   export_tflite_lstd_graph_lib.export_tflite_graph(
       pipeline_config,
